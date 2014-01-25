@@ -1,6 +1,8 @@
 body {
-      background: black;
+      background: magenta;
       text-align: center;
       color: #DDD;
       font-family: Arial;
+      padding: 0;
+      margin: 0;
     }
