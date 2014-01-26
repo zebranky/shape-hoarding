@@ -48,7 +48,8 @@
         // HACKITY HACK
         // Unstacked cards must go in a div.stackContainer... yes the name is bad.
         var $container = $( '<div></div>' )
-          .addClass( 'stackContainer' );
+          .addClass( 'stackContainer' )
+          .addClass( 'singletonStack' );
         var $stack = $( '<div></div>' )
           .addClass( 'stack' );
 

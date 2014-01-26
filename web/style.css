@@ -138,7 +138,9 @@ div#cards2 {
   -webkit-border-radius: 0 8px 0 8px;
   -moz-border-radius: 0 8px 0 8px;
   border-radius: 0 8px 0 8px;
+}
 
+.stackedCard {
   -webkit-transform-origin: center 145px;
   -moz-transform-origin: center 145px;
   -o-transform-origin: center 145px;

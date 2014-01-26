@@ -28,7 +28,8 @@
 
     render: function() {
       this.$elem = $( '<div><ul></ul></div>' )
-        .addClass( 'stackContainer' );
+        .addClass( 'stackContainer' )
+        .addClass( 'multiStack' );
       this.$ul = this.$elem.find( 'ul' )
         .addClass( 'stack' )
         .empty();
