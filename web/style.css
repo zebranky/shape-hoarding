@@ -7,9 +7,10 @@ html, body {
   background-image: url('http://i.imgur.com/CYNFdCZ.png');
 }
 
-div.stack {
+div.stackContainer {
   position: absolute;
   text-align: center;
+  margin-top: 64px;
 }
 
 div#cards1 {
@@ -22,16 +23,110 @@ div#cards2 {
   top: 25%;
 }
 
-.stack ul {
+.stackContainer ul {
   display: block;
   position: absolute;
-  -webkit-transform: rotate(38deg);
   padding: 0;
-  margin: 18px 0 0 36px;
   list-style: none;
 }
 
-.stack ul li, div.unstackedCard {
+.stackContainer ul.rot10 {
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  -ms-transform: rotate(10deg)
+  transform: rotate(10deg);
+}
+
+.stackContainer ul.rot20 {
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  -o-transform: rotate(20deg);
+  -ms-transform: rotate(20deg)
+  transform: rotate(20deg);
+}
+
+.stackContainer ul.rot30 {
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(rot30);
+  -o-transform: rotate(rot30);
+  -ms-transform: rotate(rot30)
+  transform: rotate(rot30);
+}
+
+.stackContainer ul.rot40 {
+  -webkit-transform: rotate(40deg);
+  -moz-transform: rotate(40deg);
+  -o-transform: rotate(40deg);
+  -ms-transform: rotate(40deg)
+  transform: rotate(40deg);
+}
+
+.stackContainer ul.rot50 {
+  -webkit-transform: rotate(50deg);
+  -moz-transform: rotate(50deg);
+  -o-transform: rotate(50deg);
+  -ms-transform: rotate(50deg)
+  transform: rotate(50deg);
+}
+
+.stackContainer ul.rot60 {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+  -ms-transform: rotate(60deg)
+  transform: rotate(60deg);
+}
+
+.stackContainer ul li.rot-20 {
+  -webkit-transform: rotate(-20deg);
+  -moz-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg)
+  transform: rotate(-20deg);
+}
+
+.stackContainer ul li.rot-40 {
+  -webkit-transform: rotate(-40deg);
+  -moz-transform: rotate(-40deg);
+  -o-transform: rotate(-40deg);
+  -ms-transform: rotate(-40deg)
+  transform: rotate(-40deg);
+}
+
+.stackContainer ul li.rot-60 {
+  -webkit-transform: rotate(-60deg);
+  -moz-transform: rotate(-60deg);
+  -o-transform: rotate(-60deg);
+  -ms-transform: rotate(-60deg)
+  transform: rotate(-60deg);
+}
+
+.stackContainer ul li.rot-80 {
+  -webkit-transform: rotate(-80deg);
+  -moz-transform: rotate(-80deg);
+  -o-transform: rotate(-80deg);
+  -ms-transform: rotate(-80deg)
+  transform: rotate(-80deg);
+}
+
+.stackContainer ul li.rot-100 {
+  -webkit-transform: rotate(-100deg);
+  -moz-transform: rotate(-100deg);
+  -o-transform: rotate(-100deg);
+  -ms-transform: rotate(-100deg)
+  transform: rotate(-100deg);
+}
+
+.stackContainer ul li.rot-120 {
+  -webkit-transform: rotate(-120deg);
+  -moz-transform: rotate(-120deg);
+  -o-transform: rotate(-120deg);
+  -ms-transform: rotate(-120deg)
+  transform: rotate(-120deg);
+}
+
+.card {
   list-style: none;
   display: inline-block;
   position: absolute;
@@ -40,14 +135,28 @@ div#cards2 {
   background-color: #666;
   background-image: url('http://i.imgur.com/25ee9Wv.png');
   box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 0 8px 0 8px;
+  -moz-border-radius: 0 8px 0 8px;
   border-radius: 0 8px 0 8px;
-  margin-right: -80px;
+
   -webkit-transform-origin: center 145px;
+  -moz-transform-origin: center 145px;
+  -o-transform-origin: center 145px;
+  -ms-transform-origin: center 145px;
+  transform-origin: center 145px;
   -webkit-transition: all .6s linear;
+  -moz-transition: all .6s linear;
+  -o-transition: all .6s linear;
+  -ms-transition: all .6s linear;
+  transition: all .6s linear;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
-.stackedCard div, .unstackedCard div {
+.card div {
   width: 108px;
   height: 108px;
   margin: 0 auto;
@@ -55,14 +164,20 @@ div#cards2 {
   background-color: #ad4;
 }
 
-div.jewel {
+div.cost {
   position: relative;
-  width: 16px;
+  width: 24px;
   height: 24px;
-  border-radius: 8px;
-  background-color: white;
-  top: 185px;
-  left: -10px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  background-color: #a44;
+  top: 140px;
+  font-family: sans-serif;
+  line-height: 1.6em;
+  font-size: 1em;
+  font-weight: bold;
+  color: #ccc;
 }
 
 .vertical-rule {
@@ -77,94 +192,128 @@ div.jewel {
 
 .counters {
   position: absolute;
-  width: 393px;
+  width: 85px;
   height: 85px;
   background-color: white;
   background: linear-gradient(to bottom, #bbb, #ddd, #bbb);
 }
 
+.counters div {
+  height: 65px;
+  width: 65px;
+  margin: 10px 0 10px 10px;
+  text-decoration: none;
+  display: inline-block;
+  -webkit-border-radius: 35px;
+  -moz-border-radius: 35px;
+  border-radius: 35px;
+  font-family: sans-serif;
+  font-size: 2.5em;
+  text-align: center;
+  line-height: 1.6em;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
 .counters1 {
   left: 0;
   top: 0;
+  -webkit-border-radius: 0 0 8px 0;
+  -moz-border-radius: 0 0 8px 0;
   border-radius: 0 0 8px 0;
 }
 
 .counters2 {
   right: 0;
   top: 0;
+  -webkit-border-radius: 0 0 0 8px;
+  -moz-border-radius: 0 0 0 8px;
   border-radius: 0 0 0 8px;
 }
 
-.counters ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+.counters1 div {
+  background-color: #333;
+  color: #ddd;
+  border: 1px solid #ddd;
 }
 
-.counters1 li {
-  height: 65px;
-  width: 65px;
-  margin: 10px -2px 10px 10px;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 35px;
-  background-color: black;
+.counters2 div {
+  background-color: #ddd;
+  color: #333;
+  border: 1px solid #333;
 }
 
-.counters2 li {
-  height: 65px;
-  width: 65px;
-  margin: 10px -2px 10px 10px;
-  text-decoration: none;
-  display: inline-block;
-  border-radius: 35px;
-  background-color: white;
-}
-
-.markers {
+.values {
   position: absolute;
   width: 393px;
   height: 85px;
-  left: 50%;
-  margin-left: -200px;
   background-color: white;
   background: linear-gradient(to bottom, #bbb, #ddd, #bbb);
   bottom: 0;
-  border-radius: 8px 8px 0 0;
 }
 
-.markers ul {
+.values1 {
+  left: 0;
+  -webkit-border-radius: 0 8px 0 0;
+  -moz-border-radius: 0 8px 0 0;
+  border-radius: 0 8px 0 0;
+}
+
+.values2 {
+  right: 0;
+  -webkit-border-radius: 8px 0 0 0;
+  -moz-border-radius: 8px 0 0 0;
+  border-radius: 8px 0 0 0;
+}
+
+.values ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-.markers ul li {
+.values ul li {
+  position: relative;
   list-style: none;
   height: 65px;
   width: 65px;
   margin: 10px -2px 10px 10px;
   text-decoration: none;
   display: inline-block;
-  border-radius: 35px;
 }
 
-.markers ul li:nth-child(1) {
+.values ul li:nth-child(1) {
   background-color: #755;
 }
 
-.markers ul li:nth-child(2) {
+.values ul li:nth-child(2) {
   background-color: #775;
 }
 
-.markers ul li:nth-child(3) {
+.values ul li:nth-child(3) {
   background-color: #577;
 }
 
-.markers ul li:nth-child(4) {
+.values ul li:nth-child(4) {
   background-color: #557;
 }
 
-.markers ul li:nth-child(5) {
+.values ul li:nth-child(5) {
   background-color: #357;
+}
+
+.values ul li div {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #4a4;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 15px;
+  font-family: sans-serif;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.8em;
+  color: #333;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }

@@ -30,16 +30,31 @@
     render: function() {
       if ( this.stacked ) {
         this.$elem = $( '<li><div></div></li>' )
-          .addClass( 'stackedCard' );
+          .addClass( 'stackedCard' )
       } else {
         this.$elem = $( '<div><div></div></div>' )
           .addClass( 'unstackedCard' );
       }
-      if ( this.$img ) {
-        this.$elem.append( this.$img );
-      }
-      this.$elem.css('-webkit-transform','rotate('+this.angle+'deg)');
+      // if ( this.$img ) {
+      //   this.$elem.append( this.$img );
+      // }
+      this.$elem
+        .addClass( 'card' )
+        .addClass( 'rot' + this.angle );
+        //.css('-webkit-transform','rotate('+this.angle+'deg)');
       this.$elem.find( 'div' ).css( 'background-color', this.color );
+
+      if ( !this.stacked ) {
+        // HACKITY HACK
+        // Unstacked cards must go in a div.stackContainer... yes the name is bad.
+        var $container = $( '<div></div>' )
+          .addClass( 'stackContainer' );
+        var $stack = $( '<div></div>' )
+          .addClass( 'stack' );
+
+        this.$elem = $container.append( $stack.append( this.$elem ));
+      }
+
       return this;
     }
   });

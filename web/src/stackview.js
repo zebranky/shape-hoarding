@@ -28,9 +28,10 @@
 
     render: function() {
       this.$elem = $( '<div><ul></ul></div>' )
-        .addClass( 'stack' );
-      this.$ul = this.$elem.find( 'ul' );
-      this.$ul.empty();
+        .addClass( 'stackContainer' );
+      this.$ul = this.$elem.find( 'ul' )
+        .addClass( 'stack' )
+        .empty();
       this.cardViews.forEach(function( view, index ) {
         view
           .setStacked( true )
@@ -38,6 +39,13 @@
           .render();
         this.$ul.append( view.$elem );
       }, this );
+
+      var degree = (this.cardViews.length - 1 ) * 10;
+
+      this.$ul
+        .addClass("rot"+degree)
+        .css("margin",""+(20+((degree-10)/2))+"px 0 0 "+(-24+(26*((degree/10)-1)))+"px");
+
       return this;
     }
   });

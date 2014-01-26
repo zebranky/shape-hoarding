@@ -14,5 +14,7 @@ Game = {
 
     $( Crafty.stage.elem ).append( stack.$elem );
     $( Crafty.stage.elem ).append( card.$elem );
+
+    $( '.stackContainer' ).draggable({ revert: true });
   }
 };
