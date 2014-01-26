@@ -5,8 +5,9 @@ Game = {
     Crafty.init(); //800, 500);
 
     var stack = Crafty.e( 'StackView' )
-      .addCardView( Crafty.e( 'CardView' ))
-      .addCardView( Crafty.e( 'CardView' ))
+      .updateFromStack({
+        pieces: [ 'red', 'yellow', 'green' ]
+      })
       .render();
 
     var card = Crafty.e( 'CardView' ).render();
@@ -14,4 +15,4 @@ Game = {
     $( Crafty.stage.elem ).append( stack.$elem );
     $( Crafty.stage.elem ).append( card.$elem );
   }
-}
+};
