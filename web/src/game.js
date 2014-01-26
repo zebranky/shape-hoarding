@@ -10,31 +10,35 @@ Game = {
     Crafty.init( WIDTH, HEIGHT );
     Crafty.background('green');
 
-    // Keep track of the Draggable entity that is currently being dragged.
-    var currentDraggedEntity = null;
+    // Custom drag behavior
+    (function() {
+      // Keep track of the Draggable entity that is currently being dragged.
+      var currentDraggedEntity = null;
 
-    // An event handler for dropping the current Draggable entity on a
-    // mouseup event. We will apply this handler to the window whenever
-    // the mouse leaves the Crafty stage.
-    var dropOnMouseUp = function listener( event ) {
-      if ( currentDraggedEntity ) {
-        currentDraggedEntity.stopDrag();
-        window.removeEventListener( 'mouseup', listener );
-      }
-    };
+      // An event handler for dropping the current Draggable entity on a
+      // mouseup event. We will apply this handler to the window whenever
+      // the mouse leaves the Crafty stage.
+      var dropOnMouseUp = function listener( event ) {
+        if ( currentDraggedEntity ) {
+          currentDraggedEntity.stopDrag();
+          window.removeEventListener( 'mouseup', listener );
+        }
+      };
 
-    Crafty.stage.elem.addEventListener( 'mouseleave', function() {
-      window.addEventListener( 'mouseup', dropOnMouseUp );
-    });
+      Crafty.stage.elem.addEventListener( 'mouseleave', function() {
+        window.addEventListener( 'mouseup', dropOnMouseUp );
+      });
 
-    Crafty.stage.elem.addEventListener( 'mouseenter', function() {
-      window.removeEventListener( 'mouseup', dropOnMouseUp );
-    });
+      Crafty.stage.elem.addEventListener( 'mouseenter', function() {
+        window.removeEventListener( 'mouseup', dropOnMouseUp );
+      });
+    }());
 
-    Crafty.load([ 'assets/smiley.png' ], function() {
-      var ent = Crafty.e( '2D, DOM, Draggable, Image' ).attr({
-        x: 0, y: 0, w: 100, h: 100
-      }).image( 'assets/smiley.png' );
+
+    var createCustomDraggable = function( x, y, imagePath ) {
+      var ent = Crafty.e( '2D, Collision, DOM, Draggable, Image' ).attr({
+        x: x, y: y, w: 100, h: 100
+      }).image( imagePath );
 
       var margin = 5;
 
@@ -61,13 +65,34 @@ Game = {
       // Keep track of the current dragged entity.
       ent.bind( 'StartDrag', function() {
         currentDraggedEntity = ent;
+
+        // Move this object to the front
+        var $this = $( ent._element );
+        var $parent = $this.parent();
+        $this
+          .detach()
+          .appendTo( $parent );
+
       });
 
       ent.bind( 'StopDrag', function() {
         if ( currentDraggedEntity === ent ) {
           currentDraggedEntity = null;
+          ent.css( 'z-index', '0' );
+        }
+
+        // Check for collision with other draggables
+        var colliders = ent.hit( 'Draggable' );
+        if ( colliders ) {
+          console.log( 'Dropped on another draggable:', colliders[ 0 ]);
         }
       });
+
+    };
+
+    Crafty.load([ 'assets/smiley.png' ], function() {
+      var ent1 = createCustomDraggable( 20, 20, 'assets/smiley.png' );
+      var ent2 = createCustomDraggable( 200, 200, 'assets/smiley.png' );
     });
   }
 }
