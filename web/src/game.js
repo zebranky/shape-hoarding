@@ -10,6 +10,27 @@ Game = {
     Crafty.init( WIDTH, HEIGHT );
     Crafty.background('green');
 
+    // Keep track of the Draggable entity that is currently being dragged.
+    var currentDraggedEntity = null;
+
+    // An event handler for dropping the current Draggable entity on a
+    // mouseup event. We will apply this handler to the window whenever
+    // the mouse leaves the Crafty stage.
+    var dropOnMouseUp = function listener( event ) {
+      if ( currentDraggedEntity ) {
+        currentDraggedEntity.stopDrag();
+        window.removeEventListener( 'mouseup', listener );
+      }
+    };
+
+    Crafty.stage.elem.addEventListener( 'mouseleave', function() {
+      window.addEventListener( 'mouseup', dropOnMouseUp );
+    });
+
+    Crafty.stage.elem.addEventListener( 'mouseenter', function() {
+      window.removeEventListener( 'mouseup', dropOnMouseUp );
+    });
+
     Crafty.load([ 'assets/smiley.png' ], function() {
       var ent = Crafty.e( '2D, DOM, Draggable, Image' ).attr({
         x: 0, y: 0, w: 100, h: 100
@@ -31,13 +52,20 @@ Game = {
         }
       };
 
+      // Make sure the entity stops at the bounds of the scene when
+      // dragged.
       ent.bind( 'Dragging', function( mouseevent ) {
         snapEntity( ent, WIDTH, HEIGHT, margin );
       });
 
-      Crafty.stage.elem.addEventListener( 'mouseleave', function( event ) {
-        if ( event.target === Crafty.stage.elem ) {
-          ent.stopDrag();
+      // Keep track of the current dragged entity.
+      ent.bind( 'StartDrag', function() {
+        currentDraggedEntity = ent;
+      });
+
+      ent.bind( 'StopDrag', function() {
+        if ( currentDraggedEntity === ent ) {
+          currentDraggedEntity = null;
         }
       });
     });
