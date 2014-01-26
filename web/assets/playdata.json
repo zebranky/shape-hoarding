@@ -1,0 +1,31 @@
+{
+  "shapeimages": [
+    "alcohol.png",
+    "android.png",
+    "apple.png",
+    "baby.png",
+    "cheeseburger.png",
+    "death.png",
+    "dog.png",
+    "drugs.jpg",
+    "female.png",
+    "football.png",
+    "gun.png",
+    "house.png",
+    "hanger.png",
+    "kitty.png",
+    "love.png",
+    "male.png",
+    "prayer.jpg",
+    "presentation.png",
+    "religion.png",
+    "richguy.gif"
+  ]
+  
+  "shapevalues": [
+	-2,
+	-1,
+	1,
+	2
+  ]
+}

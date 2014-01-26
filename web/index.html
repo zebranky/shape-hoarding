@@ -8,7 +8,12 @@
 
   <script src="src/game.js"></script>
   <script>
-    window.addEventListener('load', Game.start);
+  	var LoadData = function ( )
+  	{
+  		$.get( "assets/playdata.json", function (data) { var playdata = JSON.parse(data); Game.start(playdata); } );
+  	};
+  
+    window.addEventListener('load', LoadData);
   </script>
   <link rel="stylesheet" type="text/css" href="style.css"/>
 
