@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script src="lib/jquery.min.js"></script>
+  <script src="lib/jquery-1.11.0.js"></script>
   <script src="lib/crafty.js"></script>
   <script src="lib/underscore.js"></script>
   <script src="lib/state-machine.js"></script>
 
+  <script src="src/components.js"></script>
+  <script src="src/scenes.js"></script>
   <script src="src/game.js"></script>
   <script>
-  	var LoadData = function ( )
-  	{
-  		$.get( "assets/playdata.json", function (data) { var playdata = JSON.parse(data); Game.start(playdata); } );
-  	};
-  
-    window.addEventListener('load', LoadData);
+    window.addEventListener('load', Game.start);
   </script>
   <link rel="stylesheet" type="text/css" href="style.css"/>
 
   <title>Shape Hoarding</title>
 </head>
 <body>
+    <div id="cr-stage"></div>
 </body>
 </html>

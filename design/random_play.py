@@ -23,8 +23,7 @@ class Stack(object):
         return len(self.stack) == 1
     
     def next_cost(self):
-        next_size = len(self.stack)
-        return (next_size * (next_size+1)) / 2
+        return len(self.stack)
     
     def __str__(self):
         pretty = {
@@ -46,8 +45,13 @@ def score_game(stacks, point_vals, moves):
     p1_stacks = filter(lambda x: x.side == 1, stacks)
     p2_stacks = filter(lambda x: x.side == 2, stacks)
     
-    p1_score = sum(s.score(point_vals) for s in p1_stacks) + moves[1]
-    p2_score = sum(s.score(point_vals) for s in p2_stacks) + moves[2]
+    p1_score = sum(s.score(point_vals) for s in p1_stacks)
+    p2_score = sum(s.score(point_vals) for s in p2_stacks)
+    
+    print 'Preliminary score: %s - %s' % (p1_score, p2_score)
+    
+    p1_score += moves[1]
+    p2_score += moves[2]
     
     if p1_score > p2_score:
         print 'P1 wins (%s - %s)!' % (p1_score, p2_score)
@@ -71,7 +75,7 @@ def run_trial():
     stacks += [Stack(col, 1) for col in start_stacks]
     stacks += [Stack(col, 2) for col in start_stacks]
     player = 1
-    # TODO: passes
+    # TODO: voluntary passes
     forced_pass = False
     while all([x > 0 for x in moves.values()]) and any([stack.is_singleton() for stack in stacks]):
         # print current board
@@ -98,12 +102,12 @@ def run_trial():
             forced_pass = True
         elif forced_pass:
             score_game(stacks, point_vals, moves)
-            print 'game over!'
+            print 'game over (double pass)!'
             return
         # change player before ending turn
         player = 1 if player == 2 else 2
     score_game(stacks, point_vals, moves)
-    print 'game over!'
+    print 'game over (%s)!' % ('out of moves' if not all([x > 0 for x in moves.values()]) else 'no singletons')
 
 def main():
     print 'Shape Hoarding or Whatever The Fuck This Game Is!'
