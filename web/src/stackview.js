@@ -10,8 +10,9 @@
       // Create CardViews from pieces in stack
       var cards = stack && stack.pieces;
       if ( cards && cards.length ) {
-        this.cardViews = cards.map(function( card ) {
-          var view = Crafty.e( 'CardView' );
+        this.cardViews = cards.map(function( cardColor ) {
+          var view = Crafty.e( 'CardView' )
+            .setColor( cardColor );
           return view;
         });
       } else {
