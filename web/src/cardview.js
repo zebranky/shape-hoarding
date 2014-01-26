@@ -1,4 +1,14 @@
 (function() {
+
+  var COLORS = {
+    gray: '#444',
+    red: '#755',
+    yellow: '#775',
+    green: '#577',
+    purple: '#557',
+    blue: '#357'
+  };
+
   Crafty.c( 'CardView', {
     init: function() {
       this.$elem = null;
@@ -42,7 +52,10 @@
         .addClass( 'card' )
         .addClass( 'rot' + this.angle );
         //.css('-webkit-transform','rotate('+this.angle+'deg)');
-      this.$elem.find( 'div' ).css( 'background-color', this.color );
+      this.$elem.find( 'div' ).css(
+        'background-color',
+        COLORS[ this.color ]
+      );
 
       if ( !this.stacked ) {
         // HACKITY HACK

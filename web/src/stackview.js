@@ -4,6 +4,8 @@
       this.$elem = null;
       this.$ul = null;
       this.cardViews = [];
+      this.cost = 1;
+      this.position = [ 0, 0 ];
     },
 
     updateFromStack: function( stack ) {
@@ -18,6 +20,10 @@
       } else {
         this.cardViews = [];
       }
+      //this.cost = stack.nextCost || 1;
+      this.cost = this.cardViews.length;
+      this.position = stack.position.slice();
+      this.side = stack.side;
       return this;
     },
 
@@ -33,6 +39,13 @@
       this.$ul = this.$elem.find( 'ul' )
         .addClass( 'stack' )
         .empty();
+
+      // Add cost div
+      var $cost = $( '<div></div>' )
+        .addClass( 'cost' )
+        .text( this.cost );
+      this.$elem.append( $cost );
+
       this.cardViews.forEach(function( view, index ) {
         view
           .setStacked( true )
@@ -45,7 +58,12 @@
 
       this.$ul
         .addClass("rot"+degree)
-        .css("margin",""+(20+((degree-10)/2))+"px 0 0 "+(-24+(26*((degree/10)-1)))+"px");
+        .css("margin",""+(((degree-10)/2))+"px 0 0 "+(-24+(26*((degree/10)-1)))+"px");
+
+      this.$elem
+        .css( 'left', this.side ? '52%' : '0' )
+        .css( 'margin-left', this.position[ 0 ] * 300 + 100 )
+        .css( 'top', this.position[ 1 ] * 185 + 20 );
 
       return this;
     }

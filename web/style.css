@@ -5,6 +5,7 @@ html, body {
   height: 100%;
   background-color: #333;
   background-image: url('http://i.imgur.com/CYNFdCZ.png');
+  overflow: hidden;
 }
 
 div.stackContainer {
@@ -251,6 +252,12 @@ div.cost {
   background-color: white;
   background: linear-gradient(to bottom, #bbb, #ddd, #bbb);
   bottom: 0;
+  
+  -webkit-transition: all .3s linear;
+  -moz-transition: all .3s linear;
+  -o-transition: all .3s linear;
+  -ms-transition: all .3s linear;
+  transition: all .3s linear;
 }
 
 .values1 {
@@ -318,4 +325,47 @@ div.cost {
   line-height: 1.8em;
   color: #333;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.showHide {
+  z-index: 1;
+  width: 90%;
+  height: 40px;
+  left: 50%;
+  margin-left: -45%;
+  position: relative;
+  margin-top: -50px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.6em;
+  line-height: 1.6em;
+
+  -moz-box-shadow:inset 0px 1px 0px 0px #fff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fff;
+	box-shadow:inset 0px 1px 0px 0px #fff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ccc), color-stop(1, #aaa) );
+	background:-moz-linear-gradient( center top, #ccc 5%, #aaa 100% );	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ccc', endColorstr='#aaa');
+	background-color:#ededed;
+	border:1px solid #dcdcdc;
+	color:#333;
+	text-shadow:1px 1px 0px #fff;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  cursor: pointer;
+}
+
+.showHide:hover {
+ background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #aaa), color-stop(1, #ccc) );
+	background:-moz-linear-gradient( center top, #aaa 5%, #ccc 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaa', endColorstr='#ccc');
+	background-color:#dfdfdf;
 }
