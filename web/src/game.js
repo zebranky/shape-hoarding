@@ -9,9 +9,9 @@ Game = {
     Crafty.init( WIDTH, HEIGHT );
     Crafty.background('green');
 
-    var ent = Crafty.e('2D, DOM, Color, Draggable').attr({
+    var ent = Crafty.e( '2D, DOM, Draggable, Image' ).attr({
       x: 0, y: 0, w: 100, h: 100
-    }).color('#F00');
+    }).image( 'assets/smiley.png' );
 
     var margin = 5;
 
@@ -29,35 +29,14 @@ Game = {
       }
     };
 
-    var count = 0;
     ent.bind( 'Dragging', function( mouseevent ) {
       snapEntity( ent, WIDTH, HEIGHT, margin );
     });
-
-
-    var pointInBounds = function( x, y, w, h ) {
-      return ( x > 0 ) &&
-        ( x < w ) &&
-        ( y > 0 ) &&
-        ( y < h );
-    };
 
     Crafty.stage.elem.addEventListener( 'mouseleave', function( event ) {
       if ( event.target === Crafty.stage.elem ) {
         ent.stopDrag();
       }
     });
-
-    // ent.bind( 'MouseOut', function() {
-    //   ent.stopDrag();
-    // });
-
-    // Crafty.bind( 'Click', function() {
-    //   console.log( 'click' );
-    // });
-
-    // Crafty.stage.bind( 'MouseOut', function() {
-    //   console.log( 'out of stage' );
-    // });
   }
 }
